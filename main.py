@@ -1,5 +1,6 @@
 import os
 import re
+import zipfile
 import subprocess
 
 from tqdm.auto import tqdm
@@ -8,46 +9,49 @@ if __name__ == '__main__':
     
     ROOT_DIR = os.getcwd()
     ROOT_DATA = os.path.join(ROOT_DIR, 'DATA')
-    DATA_NAME = 'monet2photo'
+    DATA_NAME = 'vangogh2photo'
     DATA_DIR = os.path.join(ROOT_DATA, DATA_NAME)
     
     
     chk = False
     if not os.path.exists(DATA_DIR):
-        # Define the shell script path
         script_file = os.path.join(ROOT_DIR, 'datasets', 'download.sh')
         print(f"Executing download script: {script_file}")
+        
+        if not os.path.isfile(os.path.join(ROOT_DATA, f"{DATA_NAME}.zip")):
+            print(f"\nDownloading zipfile dataset {DATA_NAME}\n")
+            try:
+                with subprocess.Popen(
+                    ['bash', '-x', script_file, DATA_NAME],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    text=True
+                ) as proc:
+                    pbar = tqdm(total=100, desc=f"Downloading", unit="%")
 
-        # Execute the shell script with subprocess
-        try:
-            with subprocess.Popen(
-                ['bash', '-x', script_file, DATA_NAME],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True
-            ) as proc:
-                # Initialize tqdm progress bar
-                pbar = tqdm(total=100, desc=f"Downloading {DATA_NAME} : ", unit="%")
+                    for line in proc.stderr:
+                        match = re.search(r'(\d+)%', line)
+                        if match:
+                            percentage = int(match.group(1))
+                            pbar.n = percentage
+                            pbar.refresh()
+
+                    proc.wait()
+                    pbar.n = 100  # Set progress bar to complete at 100%
+                    pbar.refresh()
+                    pbar.close()
                 
-                for line in proc.stderr:  # wget outputs progress to stderr
-                    # Match percentage from wget output using regex
-                    match = re.search(r'(\d+)%', line)
-                    if match:
-                        # Update progress bar
-                        percentage = int(match.group(1))
-                        pbar.n = percentage
-                        pbar.refresh()
-
-                # Close the progress bar when done
-                pbar.close()
-            
-            print("Download and extraction complete for dataset: {}".format(DATA_NAME))
-        except subprocess.CalledProcessError as e:
-            print("Error occurred while executing the shell script.")
-            print(e.stderr.decode())
-    
-        chk = True
-    print(DATA_DIR)
-    print(chk)
-    
+                print("Shell script executed successfully.")
+                
+            except subprocess.CalledProcessError as e:
+                print("Error occurred while executing the shell script.")
+                print(e.stderr.decode())
+        
+        # Unzip the downloaded file in Python
+        zip_path = os.path.join(ROOT_DATA, f"{DATA_NAME}.zip")
+        print(f"\nUnzipping {zip_path}...")
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(ROOT_DATA)
+        print("Dataset is ready!")
+        
     
