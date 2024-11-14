@@ -18,7 +18,6 @@ class ArtDataset(Dataset):
         self.files_A = sorted(glob.glob(os.path.join(DATA_DIR, f'{mode}A') + '/*.*'))
         self.files_B = sorted(glob.glob(os.path.join(DATA_DIR, f'{mode}B') + '/*.*'))
         
-        
     
     def __getitem__(self, index):
         item_A = self.transform(Image.open(self.files_A[index % len(self.files_A)]))
@@ -28,7 +27,7 @@ class ArtDataset(Dataset):
         else:
             item_B = self.transform(Image.open(self.files_B[index % len(self.files_B)]))
             
-        return {'A': item_A, 'B': item_B}
+        return (item_A, item_B)
     
     
     def __len__(self):
