@@ -1,3 +1,5 @@
+import torch
+
 # Adversarial Loss of Generator
 def get_gen_adversarial_loss(real_X, disc_Y, gen_XY, adv_criterion):
     fake_Y = gen_XY(real_X)
@@ -34,8 +36,8 @@ def get_gen_loss(real_A, real_B, gen_AB, gen_BA, disc_A, disc_B,
     gen_adversarial_loss = adv_loss_BA + adv_loss_AB
     
     # Identity Loss
-    identity_loss_A, identity_A = get_identity_loss(real_A, gen_BA, identity_loss)
-    identity_loss_B, identity_B = get_identity_loss(real_B, gen_AB, identity_loss)
+    identity_loss_A, identity_A = get_identity_loss(real_A, gen_BA, identity_criterion)
+    identity_loss_B, identity_B = get_identity_loss(real_B, gen_AB, identity_criterion)
     gen_identity_loss = identity_loss_A + identity_loss_B
     
     # Cycle-Consistency Loss
