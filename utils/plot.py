@@ -1,4 +1,4 @@
-import pathlib
+import os
 import matplotlib.pyplot as plt
 from torchvision.utils import make_grid
 
@@ -19,9 +19,9 @@ def show_tensor_images(image_tensor, num_images=25, size=(1, 28, 28), current_st
     plt.axis('off')
     fig_name = "step_{}_{}".format(current_step, state)
     plt.title(fig_name)
-    current_path = pathlib.Path(__file__).parent.resolve()
-    save_dir = f"{current_path}/runs"
+    work_dir = os.getcwd()
+    save_dir = f"{work_dir}/runs"
     if not os.path.exists(save_dir):
         os.mkdir(save_dir)
     plt.savefig(f"{save_dir}/{fig_name}.jpg")
-    plt.show()
+    # plt.show()
