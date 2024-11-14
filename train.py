@@ -15,19 +15,7 @@ from losses import get_disc_loss, get_gen_loss
 
 if __name__ == '__main__':
     
-    ### =============== Load data =============== ###
-    
-    ROOT_DIR = os.getcwd()
-    
-    DATA_DIR = down_data(ROOT_DIR)
-    
-    loader = ArtLoader(DATA_DIR=DATA_DIR, mode='train')
-    train_loader = loader.load_data()
-    
-    print("Number of iterations: ", len(train_loader))
-    
-    
-    ### =============== Hyper-parameters =============== ### 
+     ### =============== Hyper-parameters =============== ### 
     
     dim_A = 3
     dim_B = 3
@@ -38,11 +26,24 @@ if __name__ == '__main__':
     load_shape = 286
     target_shape = 256
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    print(device)
     
     adv_criterion = nn.MSELoss()
     recon_criterion = nn.L1Loss()
     
     save_model = False
+    
+    
+    ### =============== Load data =============== ###
+    
+    ROOT_DIR = os.getcwd()
+    
+    DATA_DIR = down_data(ROOT_DIR)
+    
+    loader = ArtLoader(DATA_DIR=DATA_DIR, batch_size=batch_size, mode='train')
+    train_loader = loader.load_data()
+    
+    print("Number of iterations: ", len(train_loader))
     
     
     ### =============== CycleGAN Model =============== ###
