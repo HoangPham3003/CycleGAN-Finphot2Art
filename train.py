@@ -17,15 +17,14 @@ if __name__ == '__main__':
     
     ### =============== Load data =============== ###
     
-    # ROOT_DIR = os.getcwd()
+    ROOT_DIR = os.getcwd()
     
-    # DATA_DIR = down_data(ROOT_DIR)
+    DATA_DIR = down_data(ROOT_DIR)
     
-    # loader = ArtLoader(DATA_DIR=DATA_DIR)
-    # train_loader, test_loader = loader.load_data()
+    loader = ArtLoader(DATA_DIR=DATA_DIR, mode='train')
+    train_loader = loader.load_data()
     
-    # print(len(train_loader))
-    # print(len(test_loader))
+    print("Number of iterations: ", len(train_loader))
     
     
     ### =============== Hyper-parameters =============== ### 
@@ -42,6 +41,8 @@ if __name__ == '__main__':
     
     adv_criterion = nn.MSELoss()
     recon_criterion = nn.L1Loss()
+    
+    save_model = False
     
     
     ### =============== CycleGAN Model =============== ###
@@ -134,16 +135,3 @@ if __name__ == '__main__':
                         'disc_B_opt': disc_B_opt.state_dict()
                     }, f"CycleGAN_{cur_step}.pt")
             cur_step += 1
-            
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        
-    
