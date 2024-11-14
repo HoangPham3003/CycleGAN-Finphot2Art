@@ -37,6 +37,6 @@ class Discriminator(nn.Module):
         x1 = self.contract1(x0)
         x2 = self.contract2(x1)
         x3 = self.contract3(x2)
-        xn = self.finald(x3)
+        xn = self.final(x3)
         return xn
         

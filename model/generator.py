@@ -42,7 +42,7 @@ class Generator(nn.Module):
         x9 = self.res6(x8)
         x10 = self.res7(x9)
         x11 = self.res8(x10)
-        x12 = self.expand2(x11)
+        x12 = self.expand1(x11)
         x13 = self.expand2(x12)
         xn = self.downfeature(x13)
         return self.tanh(xn)
