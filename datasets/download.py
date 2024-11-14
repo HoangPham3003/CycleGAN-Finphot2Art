@@ -6,7 +6,7 @@ import subprocess
 from tqdm.auto import tqdm
 
 
-def load_data(ROOT_DIR=''):
+def down_data(ROOT_DIR=''):
     ROOT_DATA = os.path.join(ROOT_DIR, 'DATA')
     if not os.path.exists(ROOT_DATA):
         os.mkdir(ROOT_DATA)
