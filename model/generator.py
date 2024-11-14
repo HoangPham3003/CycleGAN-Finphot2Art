@@ -6,7 +6,7 @@ from .expanding import ExpandingBlock
 from .featuremap import FeatureMapBlock
 
 
-class Generator(nn.module):
+class Generator(nn.Module):
     def __init__(self, input_channels, output_channels, hidden_channels=64):
         super(Generator, self).__init__()
         
@@ -25,7 +25,7 @@ class Generator(nn.module):
         self.res8 = ResidualBlock(input_channels=hidden_channels * res_mult)
         self.expand1 = ExpandingBlock(input_channels=hidden_channels * 4)
         self.expand2 = ExpandingBlock(input_channels=hidden_channels * 2)
-        self.downfeature = FeatureMapBlock(input_channels=hidden_channels, out_channels=output_channels)
+        self.downfeature = FeatureMapBlock(input_channels=hidden_channels, output_channels=output_channels)
         self.tanh = nn.Tanh()
         
     

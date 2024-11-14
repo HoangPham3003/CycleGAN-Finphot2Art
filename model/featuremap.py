@@ -14,6 +14,6 @@ class FeatureMapBlock(nn.Module):
         )
         
     
-    def forward(self, x)
+    def forward(self, x):
         x = self.conv(x)
         return x

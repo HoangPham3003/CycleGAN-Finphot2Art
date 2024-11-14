@@ -1,7 +1,7 @@
 import torch.nn as nn
 
 
-class ExpandingBlock(nn.module):
+class ExpandingBlock(nn.Module):
     def __init__(self, input_channels, use_bn=True):
         super(ExpandingBlock, self).__init__()
         

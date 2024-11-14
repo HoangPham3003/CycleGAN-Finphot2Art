@@ -6,7 +6,7 @@ class ContractingBlock(nn.Module):
         
         self.conv1 = nn.Conv2d(
             in_channels=input_channels,
-            out_channels=input_channels * 2
+            out_channels=input_channels * 2,
             kernel_size=kernel_size,
             padding=1,
             stride=2,

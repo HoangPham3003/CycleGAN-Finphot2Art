@@ -1,11 +1,14 @@
 import torch.nn as nn
 
+from .featuremap import FeatureMapBlock
+from .contracting import ContractingBlock
+
 
 class Discriminator(nn.Module):
     def __init__(self, input_channels, hidden_channels=64):
         super(Discriminator, self).__init__()
         
-        self.upfeature = FeatureMapBlock(input_channels=in_channels, output_channels=hidden_channels)
+        self.upfeature = FeatureMapBlock(input_channels=input_channels, output_channels=hidden_channels)
         self.contract1 = ContractingBlock(
             input_channels=hidden_channels,
             use_bn=False,
@@ -13,7 +16,7 @@ class Discriminator(nn.Module):
             activation='lrelu'
         )
         self.contract2 = ContractingBlock(
-            input_channels=hidden_channels * 2.
+            input_channels=hidden_channels * 2,
             kernel_size=4,
             activation='lrelu'
         )
