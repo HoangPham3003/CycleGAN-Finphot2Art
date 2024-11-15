@@ -30,22 +30,22 @@ class Generator(nn.Module):
         
     
     def forward(self, x):
-        x0 = self.upfeature(x)
-        x1 = self.contract1(x0)
-        x2 = self.contract2(x1)
-        x3 = self.res0(x2)
-        x4 = self.res1(x3)
-        x5 = self.res2(x4)
-        x6 = self.res3(x5)
-        x7 = self.res4(x6)
-        x8 = self.res5(x7)
-        x9 = self.res6(x8)
-        x10 = self.res7(x9)
-        x11 = self.res8(x10)
-        x12 = self.expand1(x11)
-        x13 = self.expand2(x12)
-        xn = self.downfeature(x13)
-        return self.tanh(xn)
+        x = self.upfeature(x)
+        x = self.contract1(x)
+        x = self.contract2(x)
+        x = self.res0(x)
+        x = self.res1(x)
+        x = self.res2(x)
+        x = self.res3(x)
+        x = self.res4(x)
+        x = self.res5(x)
+        x = self.res6(x)
+        x = self.res7(x)
+        x = self.res8(x)
+        x = self.expand1(x)
+        x = self.expand2(x)
+        x = self.downfeature(x)
+        return self.tanh(x)
         
         
         

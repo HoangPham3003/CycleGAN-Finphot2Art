@@ -33,10 +33,10 @@ class Discriminator(nn.Module):
         
     
     def forward(self, x):
-        x0 = self.upfeature(x)
-        x1 = self.contract1(x0)
-        x2 = self.contract2(x1)
-        x3 = self.contract3(x2)
-        xn = self.final(x3)
-        return xn
+        x = self.upfeature(x)
+        x = self.contract1(x)
+        x = self.contract2(x)
+        x = self.contract3(x)
+        x = self.final(x)
+        return x
         
