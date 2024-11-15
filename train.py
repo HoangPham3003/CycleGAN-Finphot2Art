@@ -15,7 +15,7 @@ from losses import get_disc_loss, get_gen_loss
 
 if __name__ == '__main__':
     
-     ### =============== Hyper-parameters =============== ### 
+    ### =============== Hyper-parameters =============== ### 
     
     dim_A = 3
     dim_B = 3
@@ -31,7 +31,7 @@ if __name__ == '__main__':
     adv_criterion = nn.MSELoss()
     recon_criterion = nn.L1Loss()
     
-    save_model = False
+    save_model = True
     
     
     ### =============== Load data =============== ###
@@ -126,6 +126,7 @@ if __name__ == '__main__':
                 mean_discriminator_loss = 0
                 # You can change save_model to True if you'd like to save the model
                 if save_model:
+                    save_dir = '/content/drive/MyDrive/LEARNING/CV/CycleGAN'
                     torch.save({
                         'gen_AB': gen_AB.state_dict(),
                         'gen_BA': gen_BA.state_dict(),
@@ -134,5 +135,5 @@ if __name__ == '__main__':
                         'disc_A_opt': disc_A_opt.state_dict(),
                         'disc_B': disc_B.state_dict(),
                         'disc_B_opt': disc_B_opt.state_dict()
-                    }, f"CycleGAN_{cur_step}.pt")
+                    }, f"{save_dir}/CycleGAN.pt")
             cur_step += 1
