@@ -17,6 +17,11 @@ if __name__ == '__main__':
     
     ### =============== Hyper-parameters =============== ### 
     
+    # save_dir = '/content/drive/MyDrive/LEARNING/CV/CycleGAN' # GoogleColab
+    save_dir = '/kaggle/working' # Kaggle
+    work_dir = os.getcwd()
+    pretrained_dir = f"{work_dir}/pretrained"
+    
     dim_A = 3
     dim_B = 3
     n_epochs = 20
@@ -70,10 +75,21 @@ if __name__ == '__main__':
         betas=(0.5, 0.999)
     )
     
-    gen_AB = gen_AB.apply(weights_init)
-    gen_BA = gen_BA.apply(weights_init)
-    disc_A = disc_A.apply(weights_init)
-    disc_B = disc_B.apply(weights_init)
+    pretrained = False
+    if pretrained:
+        pre_dict = torch.load(f'{pretrained_dir}/CycleGAN.pt')
+        gen_AB.load_state_dict(pre_dict['gen_AB'])
+        gen_BA.load_state_dict(pre_dict['gen_BA'])
+        gen_opt.load_state_dict(pre_dict['gen_opt'])
+        disc_A.load_state_dict(pre_dict['disc_A'])
+        disc_A_opt.load_state_dict(pre_dict['disc_A_opt'])
+        disc_B.load_state_dict(pre_dict['disc_B'])
+        disc_B_opt.load_state_dict(pre_dict['disc_B_opt'])
+    else:
+        gen_AB = gen_AB.apply(weights_init)
+        gen_BA = gen_BA.apply(weights_init)
+        disc_A = disc_A.apply(weights_init)
+        disc_B = disc_B.apply(weights_init)
     
     
     ### =============== Training =============== ###
@@ -81,6 +97,9 @@ if __name__ == '__main__':
     mean_generator_loss = 0
     mean_discriminator_loss = 0
     cur_step = 0
+    if not os.path.exists(f"{save_dir}/history"):
+        os.mkdir(f"{save_dir}/history")
+    f = open(f"{save_dir}/history/train_log.txt", 'a')
     
     for epoch in range(n_epochs):
         for real_A, real_B in tqdm(train_loader):
@@ -120,13 +139,15 @@ if __name__ == '__main__':
             ### Visualization code ###
             if cur_step % display_step == 0:
                 print(f"Epoch {epoch}: Step {cur_step}: Generator (U-Net) loss: {mean_generator_loss}, Discriminator loss: {mean_discriminator_loss}")
+                
+                f.write(f"Epoch {epoch}: Step {cur_step}: Generator (U-Net) loss: {mean_generator_loss}, Discriminator loss: {mean_discriminator_loss}\n")
+                
                 show_tensor_images(torch.cat([real_A, real_B]), size=(dim_A, target_shape, target_shape), current_step=cur_step, real=True)
                 show_tensor_images(torch.cat([fake_B, fake_A]), size=(dim_B, target_shape, target_shape), current_step=cur_step, real=False)
                 mean_generator_loss = 0
                 mean_discriminator_loss = 0
                 # You can change save_model to True if you'd like to save the model
                 if save_model:
-                    save_dir = '/content/drive/MyDrive/LEARNING/CV/CycleGAN'
                     torch.save({
                         'gen_AB': gen_AB.state_dict(),
                         'gen_BA': gen_BA.state_dict(),
@@ -137,3 +158,4 @@ if __name__ == '__main__':
                         'disc_B_opt': disc_B_opt.state_dict()
                     }, f"{save_dir}/CycleGAN.pt")
             cur_step += 1
+    f.close()
