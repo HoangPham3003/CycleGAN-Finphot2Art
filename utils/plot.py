@@ -4,10 +4,6 @@ from torchvision.utils import make_grid
 
 
 def show_tensor_images(image_tensor, num_images=25, size=(1, 28, 28), current_step=500, real=True):
-    '''
-    Function for visualizing images: Given a tensor of images, number of images, and
-    size per image, plots and prints the images in a uniform grid.
-    '''
     image_tensor = (image_tensor + 1) / 2
     image_shifted = image_tensor
     image_unflat = image_tensor.detach().cpu().view(-1, *size)
@@ -24,4 +20,3 @@ def show_tensor_images(image_tensor, num_images=25, size=(1, 28, 28), current_st
     if not os.path.exists(save_dir):
         os.mkdir(save_dir)
     plt.savefig(f"{save_dir}/{fig_name}.jpg")
-    # plt.show()
