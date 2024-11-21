@@ -1,6 +1,7 @@
 tqdm
 numpy
 matplotlib
+seaborn
 opencv-python
 torch
 torchvision
