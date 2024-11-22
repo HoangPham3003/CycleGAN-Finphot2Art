@@ -59,7 +59,7 @@ For a detailed explanation of the training parameters, refer to the [train.py](h
 
 <details open>
 <summary>Infer</summary>
-To generate a new artwork from a photo:
+To generate a new artwork from a photo: <br>
 ``` bash
 python infer.py -pt CycleGAN.pt -ip img1.jpg -sd inference -d cuda
 ```
