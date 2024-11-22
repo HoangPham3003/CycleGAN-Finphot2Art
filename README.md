@@ -54,5 +54,17 @@ To customize training, you can adjust the parameters as follows: <br>
 ``` bash
 python train.py -pt CycleGAN.pt -lr 0.0002 -ep 20 -bs 1 -ds 200 -ts 256 -d cuda -s True 
 ```
-For a detailed explanation of the training parameters, refer to the ![train.py](https://github.com/HoangPham3003/CycleGAN-Finphot2Art/blob/main/train.py)
+For a detailed explanation of the training parameters, refer to the [train.py](https://github.com/HoangPham3003/CycleGAN-Finphot2Art/blob/main/train.py)
 </details>
+
+<details open>
+<summary>Infer</summary>
+To generate a new artwork from a photo:
+``` bash
+python infer.py -pt CycleGAN.pt -ip img1.jpg -sd inference -d cuda
+```
+For a detailed explanation of the inference parameters, refer to the [infer](https://github.com/HoangPham3003/CycleGAN-Finphot2Art/blob/main/infer)
+</details>
+
+
+
