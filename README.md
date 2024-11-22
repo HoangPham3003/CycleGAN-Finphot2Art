@@ -10,13 +10,13 @@ In this repository, I build and train a CycleGAN model from scratch, applying it
 <summary>Requirements</summary>
 <ul>
 <li>Python3</li>
-- tqdm
-- numpy
-- matplotlib
-- seaborn
-- opencv-python
-- torch
-- torchvision
+<li>tqdm</li>
+<li>numpy</li>
+<li>matplotlib</li>
+<li>seaborn</li>
+<li>opencv-python</li>
+<li>torch</li>
+<li>torchvision</li>
 </ul>
 </details>
 
@@ -43,19 +43,16 @@ pip install -r requirements.txt
 <details open>
 <summary>Train</summary>
 
-<div>
 Default parameters <br>
 To start training with the default parameters, run: <br>
 ``` bash
 python train.py
 ```
-</div>
-<div>
+
 Custom parameters <br>
 To customize training, you can adjust the parameters as follows: <br>
 ``` bash
 python train.py -pt CycleGAN.pt -lr 0.0002 -ep 20 -bs 1 -ds 200 -ts 256 -d cuda -s True 
 ```
 For a detailed explanation of the training parameters, refer to the ![train.py](https://github.com/HoangPham3003/CycleGAN-Finphot2Art/blob/main/train.py)
-</div>
 </details>
