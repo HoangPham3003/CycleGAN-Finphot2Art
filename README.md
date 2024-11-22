@@ -46,9 +46,11 @@ Default parameters:
 python train.py
 ```
 <br>
-or you can freely adjust parameters (more information can be found at https://github.com/HoangPham3003/CycleGAN-Finphot2Art/blob/a275c28a1179139707ad0d6fd7257964a94cb5d2/train.py#L19:
-<br>
+or you can freely adjust parameters. 
 ```bash
 python train.py -pt CycleGAN.pt -lr 0.0002 -ep 20 -bs 1 -ds 200 -ts 256 -d cuda -s True 
 ```
+More information can be found at https://github.com/HoangPham3003/CycleGAN-Finphot2Art/blob/a275c28a1179139707ad0d6fd7257964a94cb5d2/train.py#L19
+<br>
+
 </details>
