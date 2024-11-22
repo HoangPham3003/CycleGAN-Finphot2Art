@@ -8,7 +8,8 @@ In this repository, I build and train a CycleGAN model from scratch, applying it
 ## Usage
 <details open>
 <summary>Requirements</summary>
-- Python3
+<ul>
+<li>Python3</li>
 - tqdm
 - numpy
 - matplotlib
@@ -16,6 +17,7 @@ In this repository, I build and train a CycleGAN model from scratch, applying it
 - opencv-python
 - torch
 - torchvision
+</ul>
 </details>
 
 <details open>
