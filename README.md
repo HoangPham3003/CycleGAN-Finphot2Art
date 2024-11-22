@@ -42,12 +42,12 @@ pip install -r requirements.txt
 <summary>Train</summary>
 Default parameters
 To start training with the default parameters, run:
-```bash
+``` shell
 python train.py
 ```
 Custom parameters
 To customize training, you can adjust the parameters as follows:
-```bash
+``` shell
 python train.py -pt CycleGAN.pt -lr 0.0002 -ep 20 -bs 1 -ds 200 -ts 256 -d cuda -s True 
 ```
 For a detailed explanation of the training parameters, refer to the [train.py](https://github.com/HoangPham3003/CycleGAN-Finphot2Art/blob/main/train.py)
