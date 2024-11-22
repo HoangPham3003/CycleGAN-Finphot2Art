@@ -45,12 +45,12 @@ To start training with the default parameters, run:
 ``` bash
 python train.py
 ```
-<br>
+
 Custom parameters
 To customize training, you can adjust the parameters as follows:
-``` bash
+<bash>
 python train.py -pt CycleGAN.pt -lr 0.0002 -ep 20 -bs 1 -ds 200 -ts 256 -d cuda -s True 
-```
+</bash>
 For a detailed explanation of the training parameters, refer to the ![train.py](https://github.com/HoangPham3003/CycleGAN-Finphot2Art/blob/main/train.py)
 
 </details>
